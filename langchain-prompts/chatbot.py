@@ -1,5 +1,6 @@
 import warnings
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from dotenv import load_dotenv
 
 # Suppress the Google GenAI SDK automatic function calling warning
@@ -9,11 +10,13 @@ load_dotenv()
 
 chat_model = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
 
-chat_history = []
+chat_history = [
+    SystemMessage(content="You are a helpful Research AI Assistant")
+]
 
 while True:
     user_input = input("You:")
-    chat_history.append(user_input)
+    chat_history.append(HumanMessage(content=user_input))
     if user_input == 'exit':
         break
     result = chat_model.invoke(chat_history)
@@ -30,7 +33,7 @@ while True:
     else:
         final_result = block["text"]
 
-    chat_history.append(final_result)
+    chat_history.append(AIMessage(content=final_result))
     print("AI: ",final_result)
 
-    
+print(chat_history)
