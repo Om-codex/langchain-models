@@ -9,7 +9,11 @@ chat_model = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
 
 st.header("Research Tool")
 
-user_input = st.text_input("Enter your prompt")
+paper_input = st.selectbox("Select Research Paper Name", ["Attention Is All You Need","BERT: Pre-training of Deep Bidirectional Transformers", "GPT-3: Language Models are Few-Shot Learners","Diffusion Models Best GAN'S on Image Synthesis"])
+
+style_input = st.selectbox("Select Explanation Style",["Beginner Friendly","Technical","Code-Oriented","Mathematical"])
+
+length_input = st.selectbox("Select Explanation Length", ["Short (1-2 Paragraphs)","Medium (4-5 Paragraphs)","Long (Detailed Explanation)"])
 
 if st.button("Summarize"):
     result = chat_model.invoke(user_input)
