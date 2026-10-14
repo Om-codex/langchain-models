@@ -58,7 +58,8 @@ Analyze and explain the specified research paper according to the user's prefere
 
 Generate a coherent, research-focused explanation tailored to the user's selected preferences.
 """,
-input_variables = ['paper_input','style_input','length_input']
+input_variables = ['paper_input','style_input','length_input'],
+validate_template = True
 )
 
 prompt = template.invoke({
