@@ -9,20 +9,28 @@ load_dotenv()
 
 chat_model = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
 
+chat_history = []
+
 while True:
     user_input = input("You:")
+    chat_history.append(user_input)
     if user_input == 'exit':
         break
-    result = chat_model.invoke(user_input)
+    result = chat_model.invoke(chat_history)
     content = result.content
     
     if isinstance(content, list):
         for block in content:
             if isinstance(block, dict) and block.get("type") == "text":
-                print("AI: ", block["text"])
+                final_result = block["text"]
             elif isinstance(block, str):
-                print("AI: ", block)
+                final_result = block["text"]
             else:
-                print("AI: ", content)
+                final_result = block["text"]
     else:
-        print("AI: ", content)
+        final_result = block["text"]
+
+    chat_history.append(final_result)
+    print("AI: ",final_result)
+
+    
