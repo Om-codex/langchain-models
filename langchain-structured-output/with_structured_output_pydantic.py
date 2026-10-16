@@ -7,7 +7,7 @@ load_dotenv()
 
 chat_model = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
 
-# schema - Changed list to List
+# schema
 class Review(BaseModel):
     key_themes : list[str] = Field(description = "Write down all the key themes discussed in the review in a list")
     summary : str = Field(description =  "A brief summary of the review")
