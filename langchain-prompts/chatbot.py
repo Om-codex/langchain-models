@@ -30,8 +30,6 @@ while True:
                 final_result = block["text"]
             else:
                 final_result = block["text"]
-    else:
-        final_result = block["text"]
 
     chat_history.append(AIMessage(content=final_result))
     print("AI: ",final_result)
