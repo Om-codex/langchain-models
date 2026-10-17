@@ -1,11 +1,17 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
 
 load_dotenv()
 
-chat_model = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
+llm = HuggingFaceEndpoint(
+    repo_id="google/gemma-2-2b-it",
+    task="text-generation",
+    provider="featherless-ai",
+    max_new_tokens=100,
+)
 
+chat_model = ChatHuggingFace(llm=llm)
 
 # 1st prompt
 template1 = PromptTemplate(
@@ -25,6 +31,6 @@ result = chat_model.invoke(prompt1)
 
 prompt2 = template2.invoke({"text":result.content})
 
-result1 = chat_model(prompt2)
+result1 = chat_model.invoke(prompt2)
 
 print(result1.content)
