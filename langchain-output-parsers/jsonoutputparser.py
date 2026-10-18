@@ -6,7 +6,7 @@ from langchain_groq import ChatGroq
 load_dotenv()
 
 chat_model = ChatGroq(
-    model="llama-3.3-70b-versatile",
+    model="openai/gpt-oss-20b",
     temperature=0.7
 )
 
@@ -19,11 +19,8 @@ template = PromptTemplate(
   partial_variables = {"format_instruction": parser.get_format_instructions()}
 )
 
-prompt = template.format()
+chain = template | chat_model | parser
 
-result = chat_model.invoke(prompt)
-
-final_result = parser.parse(result.content)
+final_result = chain.invoke({})
 
 print(final_result)
-print(type(final_result))
