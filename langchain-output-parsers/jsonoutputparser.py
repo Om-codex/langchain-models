@@ -14,13 +14,13 @@ chat_model = ChatGroq(
 parser = JsonOutputParser()
 
 template = PromptTemplate(
-  template = "Give me the name, age and city of a fictional person \n {format_instruction}",
-  input_variable = [],
+  template = "Give me 5 facts about {topic} \n {format_instruction}",
+  input_variable = ['topic'],
   partial_variables = {"format_instruction": parser.get_format_instructions()}
 )
 
 chain = template | chat_model | parser
 
-final_result = chain.invoke({})
+final_result = chain.invoke({"topic":"black hole"})
 
 print(final_result)
