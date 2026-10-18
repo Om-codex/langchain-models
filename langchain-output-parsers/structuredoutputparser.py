@@ -33,4 +33,5 @@ template = PromptTemplate(
 chain = template | model | parser
 final_result = chain.invoke({'topic':'black hole'})
 
+
 print(final_result)
