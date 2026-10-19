@@ -9,7 +9,7 @@ model = ChatGroq(
   model = "openai/gpt-oss-20b"
 )
 prompt = PromptTemplate(
-  template = "Generate 3 interesting facts about {topic}",
+  template = "Generate a detailed roadmap to become an {topic} in 2026",
   input_variables = ['topic']
 )
 
@@ -17,8 +17,8 @@ parser = StrOutputParser()
 
 chain = prompt | model | parser
 
-result = chain.invoke({'topic': 'space'})
+result = chain.invoke({'topic': 'AI Engineer'})
 
 print(result)
 
-chain.get_graph().print_ascii()
+# chain.get_graph().print_ascii() # prints the flow of the chain
