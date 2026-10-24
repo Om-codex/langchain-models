@@ -1,8 +1,8 @@
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
-from langchain.schema.runnable import RunnableSequence
+from langchain_core.runnables import RunnableSequence
 
 load_dotenv()
 
@@ -11,7 +11,7 @@ prompt1 = PromptTemplate(
     input_variables=['topic']
 )
 
-model = ChatOpenAI()
+model = ChatGroq(model = "openai/gpt-oss-20b")
 
 parser = StrOutputParser()
 
