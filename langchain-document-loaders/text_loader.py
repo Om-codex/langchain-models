@@ -7,7 +7,7 @@ docs = loader.load()
 print(docs)
 print(type(docs))
 
-# Method 2
+# Method 2 langchain independent
 from pathlib import Path
 from langchain_core.documents import Document
 
