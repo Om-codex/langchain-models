@@ -1,8 +1,8 @@
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
-from langchain.schema.runnable import RunnableSequence, RunnableParallel
+from langchain_core.runnables import RunnableSequence, RunnableParallel
 
 load_dotenv()
 
@@ -16,7 +16,7 @@ prompt2 = PromptTemplate(
     input_variables=['topic']
 )
 
-model = ChatOpenAI()
+model = ChatGroq(model="openai/gpt-oss-20b")
 
 parser = StrOutputParser()
 
@@ -27,6 +27,7 @@ parallel_chain = RunnableParallel({
 
 result = parallel_chain.invoke({'topic':'AI'})
 
+# print(result)
 print(result['tweet'])
 print(result['linkedin'])
 
