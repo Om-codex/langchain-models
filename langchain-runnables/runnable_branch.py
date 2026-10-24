@@ -1,8 +1,8 @@
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
-from langchain.schema.runnable import RunnableSequence, RunnableParallel, RunnablePassthrough, RunnableBranch, RunnableLambda
+from langchain_core.runnables import RunnableSequence, RunnableParallel, RunnablePassthrough, RunnableBranch, RunnableLambda
 
 load_dotenv()
 
@@ -16,7 +16,7 @@ prompt2 = PromptTemplate(
     input_variables=['text']
 )
 
-model = ChatOpenAI()
+model = ChatGroq(model="openai/gpt-oss-20b")
 
 parser = StrOutputParser()
 
@@ -29,7 +29,7 @@ branch_chain = RunnableBranch(
 
 final_chain = RunnableSequence(report_gen_chain, branch_chain)
 
-print(final_chain.invoke({'topic':'Russia vs Ukraine'}))
+print(final_chain.invoke({'topic':'PM Modi vs Rahul Gandhi'}))
 
 
 
