@@ -11,5 +11,4 @@ splitter = SemanticChunker(
 
 sample = """
 Farmers were working hard in the feilds, preparing the soil fo the next season.The sun was bright, and the air smelled of earth and fresh greass.The Indian Premiere Leagure {IPL} is the biggest cricket league in the world.People all over the world.People all over the world with the matches and cheer for their favourite teams.
-
 """
