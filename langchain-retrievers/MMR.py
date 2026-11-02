@@ -1,6 +1,7 @@
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 from dotenv import load_dotenv
+from langchain_core.documents import Document
 
 load_dotenv()
 embedding_model = HuggingFaceEmbeddings(
@@ -41,7 +42,7 @@ documents = [
     Document(page_content="Fine-tuning adapts a pretrained language model to perform a specific task.")
 ]
 
-vector_store = Faiss.from_documents(
+vector_store = FAISS.from_documents(
   documents = documents,
   embedding = embedding_model
 )
@@ -51,8 +52,8 @@ retriever = vector_store.as_retriever(
 )
 
 query = "What is langchain?"
-resutls = retriever.invoke(query)
+results = retriever.invoke(query)
 
-for i, doc in results:
+for i, doc in enumerate(results):
   print(f"\n----Result {i+1}----")
-  print(doc.page_content)
+  print(doc.page_content) 
